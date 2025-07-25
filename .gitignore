@@ -1,0 +1,108 @@
+# Arquivos de Sistema Operacional
+.DS_Store             # MacOS
+Thumbs.db             # Windows
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump           # Dumps de crash
+
+# Arquivos de Log e Temporários
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+*.sublime-workspace   # Arquivos de workspace do Sublime Text
+*.sublime-project
+*.history             # Arquivos de histórico comuns
+
+# Diretórios e Arquivos de Configuração de IDEs (Editores de Código)
+.idea/                # IntelliJ IDEA / PyCharm / WebStorm
+.vscode/              # VS Code (configurações do workspace)
+*.code-workspace      # Arquivos de workspace do VS Code
+
+# Ambientes Virtuais (Python)
+.venv/
+venv/
+env/
+
+# Cache de Python
+__pycache__/
+*.pyc
+*.pyd
+*.so
+.pytest_cache/
+
+# Dependências de Node.js / JavaScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json     # Pode ser ignorado se você usa yarn.lock ou prefere gerenciar manualmente
+.pnpm-store/
+dist/                 # Saída de builds (webpack, rollup, etc.)
+build/
+.next/                # Next.js
+.nuxt/                # Nuxt.js
+.svelte-kit/          # SvelteKit
+coverage/             # Relatórios de cobertura de teste
+
+# Variáveis de Ambiente
+.env                  # Muito importante! Contém credenciais.
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Bancos de Dados Locais / SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos de Backup e Restore Comuns
+*.orig
+*.rej
+
+# Arquivos de IDEs Específicos
+*.suo                   # Visual Studio
+*.user
+*.config.user
+*.aps
+*.vspscc
+*.vssscc
+*.builds
+%USERPROFILE%\Documents\IISExpress\config\
+obj/
+bin/
+[Dd]ebug/
+[Rr]elease/
+
+# Conteúdo Gerado Automaticamente (se não for para ir para o repo)
+*.min.css             # Se você minifica o CSS e só commita o original
+*.min.js              # Se você minifica o JS e só commita o original
+
+# Arquivos de Teste / Resultados de Teste
+/test-results/
+/coverage/
+
+# Docker
+docker-compose.override.yml # Arquivo de override local do Docker Compose
+.dockerignore
+
+# Gradle (para projetos Java/Kotlin/Android)
+.gradle/
+build/
+
+# Maven (para projetos Java)
+target/
+
+# PHP (Composer, etc.)
+vendor/
+composer.lock         # Pode ser ignorado em alguns fluxos de trabalho
+
+# Logs de HTTP/API
+*.http
+
+# Adicione linhas específicas aqui se tiver outros tipos de arquivos para ignorar
+# Exemplo: pasta de uploads de mídia local
+# /uploads/
