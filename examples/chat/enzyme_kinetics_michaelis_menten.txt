@@ -1,0 +1,70 @@
+AIURM EXAMPLE - ENZYME KINETICS DATA (MICHAELIS–MENTEN) - RUN IN CHAT
+
+https://aiurm.org/activation/
+
+Step 1 — Run (paste this whole block)
+
+ ===== AIURM • DLR Setup =====
+
+ ===== D (Data) =====
+
+ Raw enzyme kinetics data (Michaelis–Menten):
+
+ Each experiment has pairs ([S], v_obs). Substrate in mM; velocities in arbitrary units.
+[
+  { "experiment": 1, "S": [0.25, 0.5, 1, 2, 4, 8], "v_obs": [2.0, 3.4, 5.5, 7.8, 9.2, 9.9] },
+  { "experiment": 2, "S": [0.25, 0.5, 1, 2, 4, 8], "v_obs": [1.6, 2.8, 4.9, 7.2, 8.7, 9.6] },
+  { "experiment": 3, "S": [0.25, 0.5, 1, 2, 4, 8], "v_obs": [1.9, 3.2, 5.1, 7.6, 9.1, 9.8] },
+  { "experiment": 4, "S": [0.25, 0.5, 1, 2, 4, 8], "v_obs": [2.1, 3.5, 5.3, 7.5, 8.9, 9.7] },
+  { "experiment": 5, "S": [0.25, 0.5, 1, 2, 4, 8], "v_obs": [1.7, 2.9, 5.0, 7.1, 8.5, 9.4] }
+]
+[*data_assays] #0
+
+
+ ===== L (Logic) =====
+
+ Nonlinear MM fit logic:
+ - Model: v = (Vmax * S) / (Km + S)
+ - Estimate (Vmax, Km) per experiment via robust least squares
+ - Compute quality (R², RMSE)
+ - 95% CI via simple bootstrap (B≈300)
+[*logic_fit] #0
+
+
+ Meta-analysis logic:
+ - Aggregate (Vmax, Km) across experiments with fixed effects (weight = 1/SE²)
+ - Compute pooled standard errors
+[*logic_meta] #0
+
+
+ ===== R (Result) – Execution =====
+
+ For i=1..data_assays.count:
+   Apply *logic_fit to *data_assays[i] and produce:
+     parameters (Vmax_i, Km_i)[*params_i] #0
+     quality (R2_i, RMSE_i) [*fit_quality_i] #0
+     95% confidence intervals [*ci_i] #0
+     residual diagnostics [*residuals_i] #0
+ Consolidate *params_* with *logic_meta [*meta_params] #0
+ Consolidate CIs and quality into a summary table [*summary_table] #0
+ Generate a short technical report (methods, results, brief tables) using
+ *params_*, *ci_*, *fit_quality_*, *meta_params, *summary_table
+[*report_mm] #0
+
+
+Step 2: On-demand reveals (run one at a time)
+
+Show *summary_table
+Show *meta_params
+Show *params_3
+Show *residuals_2
+Show *report_mm
+
+
+Step 3:  Audit and Traceability
+
+Generate full marker dependency tree in Graphviz/DOT format with grouped clusters by marker type, including metadata and color coding [*full_dependency_dot_clustered_metadata_color] 
+
+
+Paste the code into an online Graphviz/DOT visualizer, such as:
+https://dreampuf.github.io/GraphvizOnline/
