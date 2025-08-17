@@ -1,0 +1,9 @@
+# ===== HR Analysis with Simulated Data =====
+# Instructions:
+# 1. Complete onboarding at: https://aiurm.org/onboarding/
+# 2. Follow the step-by-step instructions in this example.
+# 3. Use an AI chat interface (e.g., ChatGPT) and paste the blocks as indicated.
+# 4. Observe how markers are created, referenced, and reused.
+# ---- Notes ----
+# - This example uses simulated data for demonstration.
+# - The goal is to illustrate structured, traceable, explainable, and reusable interaction via AIURM.
