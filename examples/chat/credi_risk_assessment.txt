@@ -1,0 +1,553 @@
+AIURM Credit Risk Assessment - Cheat Sheet 
+
+Although this type of workflow is typically designed for integration environments between systems and AIs, 
+here we will use the AI chat interface as an accessible and didactic way to experience the protocol in practice.
+
+
+Copy & Paste Each Step
+
+
+Step 1: Activate AIURM
+==================================================================
+Activate AIURM Protocol for credit risk assessment and loan approval workflows.
+https://aiurm.org/activation/
+
+
+Step 2: Load Credit Applications Data
+==================================================================
+
+[
+  {
+    "application_id": "CR001",
+    "applicant_name": "Mary Johnson",
+    "personal_id": "123.456.789-01",
+    "age": 34,
+    "monthly_income": 8500.00,
+    "employment_type": "Employee",
+    "employment_duration": 48,
+    "requested_amount": 45000.00,
+    "loan_purpose": "Home Purchase",
+    "credit_score": 770,
+    "current_debts": 2800.00,
+    "assets_value": 180000.00,
+    "bank_relationship": 36,
+    "checking_account_balance": 15000.00,
+    "savings_balance": 25000.00,
+    "credit_history": "Excellent",
+    "guarantor": true,
+    "collateral": "Real Estate",
+    "debt_to_income_ratio": 0.28
+  },
+  {
+    "application_id": "CR002",
+    "applicant_name": "John Smith",
+    "personal_id": "234.567.890-12",
+    "age": 28,
+    "monthly_income": 4200.00,
+    "employment_type": "Self-Employed",
+    "employment_duration": 24,
+    "requested_amount": 25000.00,
+    "loan_purpose": "Business Expansion",
+    "credit_score": 595,
+    "current_debts": 2100.00,
+    "assets_value": 55000.00,
+    "bank_relationship": 24,
+    "checking_account_balance": 4000.00,
+    "savings_balance": 12000.00,
+    "credit_history": "Good",
+    "guarantor": true,
+    "collateral": "Vehicle",
+    "debt_to_income_ratio": 0.50
+  },
+  {
+    "application_id": "CR003",
+    "applicant_name": "Anna Williams",
+    "personal_id": "345.678.901-23",
+    "age": 45,
+    "monthly_income": 12000.00,
+    "employment_type": "Employee",
+    "employment_duration": 120,
+    "requested_amount": 80000.00,
+    "loan_purpose": "Investment Property",
+    "credit_score": 705,
+    "current_debts": 3800.00,
+    "assets_value": 330000.00,
+    "bank_relationship": 84,
+    "checking_account_balance": 38000.00,
+    "savings_balance": 130000.00,
+    "credit_history": "Excellent",
+    "guarantor": true,
+    "collateral": "Real Estate",
+    "debt_to_income_ratio": 0.31
+  },
+  {
+    "application_id": "CR004",
+    "applicant_name": "Charles Brown",
+    "personal_id": "456.789.012-34",
+    "age": 52,
+    "monthly_income": 6800.00,
+    "employment_type": "Employee",
+    "employment_duration": 180,
+    "requested_amount": 35000.00,
+    "loan_purpose": "Debt Consolidation",
+    "credit_score": 465,
+    "current_debts": 8500.00,
+    "assets_value": 95000.00,
+    "bank_relationship": 60,
+    "checking_account_balance": 1200.00,
+    "savings_balance": 3500.00,
+    "credit_history": "Major Issues",
+    "guarantor": false,
+    "collateral": "None",
+    "debt_to_income_ratio": 1.25
+  },
+  {
+    "application_id": "CR005",
+    "applicant_name": "Patricia Davis",
+    "personal_id": "567.890.123-45",
+    "age": 31,
+    "monthly_income": 5500.00,
+    "employment_type": "Employee",
+    "employment_duration": 36,
+    "requested_amount": 20000.00,
+    "loan_purpose": "Vehicle Purchase",
+    "credit_score": 655,
+    "current_debts": 1400.00,
+    "assets_value": 80000.00,
+    "bank_relationship": 36,
+    "checking_account_balance": 10000.00,
+    "savings_balance": 17000.00,
+    "credit_history": "Good",
+    "guarantor": true,
+    "collateral": "Vehicle",
+    "debt_to_income_ratio": 0.25
+  },
+  {
+    "application_id": "CR006",
+    "applicant_name": "Richard Miller",
+    "personal_id": "678.901.234-56",
+    "age": 39,
+    "monthly_income": 15000.00,
+    "employment_type": "Business Owner",
+    "employment_duration": 60,
+    "requested_amount": 120000.00,
+    "loan_purpose": "Business Expansion",
+    "credit_score": 750,
+    "current_debts": 12000.00,
+    "assets_value": 450000.00,
+    "bank_relationship": 72,
+    "checking_account_balance": 65000.00,
+    "savings_balance": 180000.00,
+    "credit_history": "Excellent",
+    "guarantor": false,
+    "collateral": "Real Estate",
+    "debt_to_income_ratio": 0.80
+  }
+]
+[*credit_applications] #0
+
+
+
+Step 3: Define Credit Risk Assessment Criteria
+==================================================================
+
+Establish comprehensive credit risk evaluation framework:
+
+CREDIT SCORE EVALUATION (30% weight):
+- 750+ = 30 points (Excellent)
+- 650-749 = 25 points (Good)
+- 550-649 = 15 points (Fair)
+- 450-549 = 5 points (Poor)
+- Below 450 = 0 points (Very Poor)
+
+INCOME STABILITY ASSESSMENT (25% weight):
+- CLT employment 36+ months = 25 points
+- CLT employment 12-35 months = 20 points
+- Self-employed/Business owner 24+ months = 15 points
+- Self-employed/Business owner 12-23 months = 10 points
+- Less than 12 months employment = 0 points
+
+DEBT-TO-INCOME RATIO EVALUATION (20% weight):
+- DTI <= 0.30 = 20 points (Low risk)
+- DTI 0.31-0.50 = 15 points (Moderate risk)
+- DTI 0.51-0.80 = 10 points (High risk)
+- DTI 0.81-1.00 = 5 points (Very high risk)
+- DTI > 1.00 = 0 points (Unacceptable)
+
+COLLATERAL AND GUARANTEES (15% weight):
+- Real estate collateral = 15 points
+- Vehicle collateral + guarantor = 12 points
+- Vehicle collateral only = 8 points
+- Guarantor only = 6 points
+- No collateral/guarantor = 0 points
+
+BANKING RELATIONSHIP (10% weight):
+- 60+ months relationship = 10 points
+- 24-59 months = 8 points
+- 12-23 months = 5 points
+- Less than 12 months = 2 points
+
+CREDIT APPROVAL THRESHOLDS:
+- 85+ points = "APPROVED - Prime Rate"
+- 70-84 points = "APPROVED - Standard Rate"
+- 55-69 points = "CONDITIONAL - Higher Rate + Restrictions"
+- 40-54 points = "REFER TO MANAGER - Manual Review"
+- Below 40 points = "DECLINED - High Risk"
+
+[*credit_risk_criteria] #0
+
+
+
+Step 4: Apply Credit Risk Assessment
+==================================================================
+
+Apply *credit_risk_criteria to *credit_applications [*credit_risk_analysis] #3
+
+
+
+Step 5: Define Loan Structuring Logic
+==================================================================
+
+Determine optimal loan terms based on risk assessment:
+
+INTEREST RATE DETERMINATION:
+- Prime customers (85+ points): Base rate + 0.5%
+- Standard customers (70-84 points): Base rate + 2.0%
+- Conditional customers (55-69 points): Base rate + 4.5%
+- Manager review (40-54 points): Base rate + 6.0%
+
+LOAN-TO-VALUE RATIOS:
+- Real estate secured: Up to 80% LTV
+- Vehicle secured: Up to 70% LTV
+- Unsecured loans: Maximum 10x monthly income
+- Business loans: Maximum 60% of collateral value
+
+TERM ADJUSTMENTS:
+- Excellent credit (750+): Up to 10 years
+- Good credit (650-749): Up to 7 years
+- Fair credit (550-649): Up to 5 years
+- Poor credit (450-549): Up to 3 years
+
+ADDITIONAL CONDITIONS:
+- DTI > 0.50: Require debt consolidation component
+- Self-employed: Require 2 years tax returns
+- First-time borrowers: Mandatory financial education
+- High-value loans (>R$100k): Executive approval required
+
+RISK MITIGATION REQUIREMENTS:
+- Credit insurance for loans >R$50k
+- Co-signer requirement for DTI >0.60
+- Graduated payment structure for income volatility
+- Early payment incentives for risk reduction
+
+[*loan_structuring_logic] #0
+
+
+
+Step 6: Generate Loan Proposals
+==================================================================
+
+Apply *loan_structuring_logic to *credit_risk_analysis [*loan_proposals]
+
+
+
+Step 7: Define Portfolio Risk Management
+==================================================================
+
+Assess portfolio-level risk and concentration limits:
+
+PORTFOLIO CONCENTRATION LIMITS:
+- Maximum 15% exposure to any single industry
+- Maximum 25% exposure to self-employed borrowers
+- Maximum 30% exposure to debt consolidation loans
+- Maximum 20% exposure to investment property loans
+
+GEOGRAPHIC RISK DISTRIBUTION:
+- Monitor regional economic indicators
+- Limit concentration in high-risk zip codes
+- Diversify across urban/suburban/rural areas
+- Track local unemployment and housing trends
+
+CREDIT QUALITY DISTRIBUTION:
+- Target: 40% prime customers (750+ score)
+- Target: 35% standard customers (650-749)
+- Maximum: 20% subprime customers (550-649)
+- Maximum: 5% near-prime customers (450-549)
+
+EARLY WARNING INDICATORS:
+- Rising delinquency rates by segment
+- Increasing debt-to-income ratios
+- Deteriorating local economic conditions
+- Concentration in vulnerable industries
+
+PORTFOLIO STRESS TESTING:
+- Economic downturn scenarios
+- Interest rate shock analysis
+- Unemployment spike impact
+- Real estate value decline effects
+
+[*portfolio_risk_logic] #0
+
+
+
+
+Step 8: Generate Portfolio Risk Dashboard
+==================================================================
+
+Apply *portfolio_risk_logic to *credit_applications and combine with *credit_risk_analysis and *loan_proposals [*portfolio_dashboard]
+
+
+Quick Queries (Use Anytime)
+See Specific Results
+
+View approved applications only
+==================================================================
+
+Show applications with "APPROVED" status in *credit_risk_analysis
+
+
+View high-risk applications
+==================================================================
+
+Show applications requiring "REFER TO MANAGER" in *credit_risk_analysis
+
+
+Focus on specific loan purposes
+==================================================================
+
+Extract "Business Expansion" loans from *credit_applications
+
+
+Get brief summary
+==================================================================
+
+*portfolio_dashboard #1
+
+Get detailed analysis  
+==================================================================
+
+*portfolio_dashboard #3
+
+Get brief summary as json
+==================================================================
+
+*portfolio_dashboard as json #1
+
+
+Generate Management Reports
+==================================================================
+
+Based on *credit_risk_analysis and *loan_proposals, create executive report with:
+1. Approval rates by customer segment
+2. Average loan amounts and terms by risk category
+3. Portfolio composition and concentration metrics
+4. Revenue projections and risk-adjusted returns
+5. Recommended policy adjustments
+
+[*executive_credit_report]
+
+
+Create Regulatory Compliance Summary
+==================================================================
+
+Combine *credit_risk_analysis + *loan_proposals + *portfolio_dashboard into compliance report with:
+- Fair lending practice documentation
+- Risk-based pricing justification
+- Portfolio diversification metrics
+- Capital adequacy assessment
+- Stress testing results
+
+[*regulatory_compliance_report]
+
+
+
+Advanced: Scenario Analysis
+Step 9: Compare Different Risk Appetites
+
+Conservative risk appetite
+==================================================================
+
+Increase approval thresholds: 90+ for prime, 75+ for standard [*conservative_risk_policy] #0
+
+
+Aggressive risk appetite  
+==================================================================
+
+Decrease approval thresholds: 75+ for prime, 60+ for standard [*aggressive_risk_policy] #0
+
+
+Apply both policies
+==================================================================
+
+Apply *conservative_risk_policy to *credit_applications [*conservative_outcomes]
+
+Apply *aggressive_risk_policy to *credit_applications [*aggressive_outcomes]
+
+
+Compare business impact
+==================================================================
+
+Compare *conservative_outcomes with *aggressive_outcomes showing:
+- Approval rates and revenue impact
+- Expected loss rates by scenario
+- Portfolio quality differences
+- Capital requirement implications
+
+[*risk_appetite_comparison]
+
+
+Economic Stress Testing
+Recession scenario modeling
+==================================================================
+
+Model 20% income reduction + 100 point credit score deterioration [*recession_scenario] #0
+
+
+Interest rate shock scenario
+==================================================================
+
+Model 300 basis point rate increase impact on affordability [*rate_shock_scenario] #0
+
+
+Apply stress scenarios
+==================================================================
+
+Apply *recession_scenario to *credit_applications [*recession_impact] 
+
+Apply *rate_shock_scenario to *loan_proposals [*rate_impact]
+
+
+
+Assess portfolio resilience
+==================================================================
+
+Combine stress test results for comprehensive risk assessment [*stress_test_results] #0
+
+*stress_test_results #3
+
+
+
+Step 10: Audit and Traceability
+Explain Decision Reasoning
+==================================================================
+
+explain reasoning for each in *aggressive_outcomes natural language 
+
+
+Show Logical/Data Dependency Tree
+==================================================================
+
+show dependency tree for *aggressive_outcomes ASCI format
+
+
+Audit Parameters and Policies
+==================================================================
+
+show parameters used in *aggressive_outcomes 
+
+
+Compare Outcomes by Policy
+==================================================================
+
+compare *aggressive_outcomes with *conservative_outcomes 
+
+
+Compare Outcomes by Policy
+==================================================================
+
+compare *aggressive_outcomes with *conservative_outcomes 
+
+
+
+Step 11 : SHAP-LIME Explainability Analysis
+==================================================================
+Explainability analysis to support credit decisions and compliance requirements:
+
+SHAP-like Global: feature importance in credit scoring model:
+
+
+Global SHAP logic for credit:
+  {
+    "method": "permutation_importance",
+    "features": ["credit_score", "debt_to_income_ratio", "employment_duration", "collateral", "guarantor", "loan_purpose"],
+    "metric": "average impact on risk score change"
+  }
+[*logic_shap_credit_global] #0
+
+
+LIME-like Local: application-specific explanations:
+
+
+Local LIME logic for credit:
+  {
+    "target_selection": "applications with score between 55 and 70 OR status in ['CONDITIONAL', 'REFER TO MANAGER']",
+    "method": "weighted_local_perturbations + local_linear_regression",
+    "output": "top-3 determining factors + impact direction"
+  }
+[*logic_lime_credit_local] #0
+
+
+Execute explainability analysis:
+
+
+Apply *logic_shap_credit_global over *credit_risk_analysis [*shap_credit_global] #0
+
+
+Select LIME cases using *logic_lime_credit_local criteria [*lime_target_cases] #0
+
+
+For each case in *lime_target_cases:
+  Apply *logic_lime_credit_local [*lime_explanation_{case_id}] #0
+
+
+Consolidate all LIME explanations [*lime_credit_summary] #0
+
+
+Generate explainability package for audit:
+  - Most relevant features globally (SHAP)
+  - Case-by-case explanations for complex decisions (LIME)
+  - Justifications for approvals/rejections
+[*explainability_audit_package] #0
+
+==================================================================
+Quick queries:
+
+Show *shap_credit_global
+Show *lime_explanation_CR002
+Show *lime_explanation_CR004
+Show *explainability_audit_package
+
+*explainability_audit_package as json 
+
+
+Step 12: Marker Dependency Visualization: Advanced (Graphviz/DOT)
+==================================================================
+
+generate full marker dependency tree in Graphviz/DOT format
+
+generate marker dependency subtree for *performance_analysis in Graphviz/DOT format
+generate hierarchical marker dependency tree in Graphviz/DOT format
+generate marker dependency tree clustered by marker type in Graphviz/DOT format
+generate marker dependency tree in Graphviz/DOT format including metadata (type, timestamp, owner)
+
+Generate full marker dependency tree in Graphviz/DOT format with grouped clusters by marker type, including metadata and color coding [*full_dependency_dot_clustered_metadata_color] 
+
+generate marker dependency tree in Graphviz/DOT format for markers:
+  *logic_shap_credit_global
+  *shap_credit_global
+  *logic_lime_credit_local
+  *lime_target_cases
+  *lime_explanation_{case_id}
+  *lime_credit_summary
+  *explainability_audit_package
+  clusters:
+    "Logic": [*logic_shap_credit_global, *logic_lime_credit_local]
+    "Results": [*shap_credit_global, *lime_credit_summary]
+    "Cases": [*lime_explanation_{case_id}]
+    "Final Package": [*explainability_audit_package]
+
+
+Visualizing the Marker Dependency Tree
+Paste the code into an online Graphviz/DOT visualizer, such as:
+==================================================================
+https://dreampuf.github.io/GraphvizOnline/
