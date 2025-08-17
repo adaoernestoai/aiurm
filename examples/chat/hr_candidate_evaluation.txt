@@ -1,0 +1,268 @@
+AIURM Protocol - HR Candidate Evaluation by AI with Traceability
+================================================================
+
+
+Step 1 — Activate
+https://aiurm.org/activation/
+
+Activate AIURM Protocol for candidate evaluation workflows. [*activate_hr] #0
+
+
+Step 2 — Load Candidates (sample data)
+
+[
+  {
+    "id": "C001",
+    "name": "Sarah Johnson",
+    "position_applied": "Senior Software Engineer",
+    "years_experience": 7,
+    "education": "BS Computer Science",
+    "previous_companies": ["Google", "Microsoft", "Startup"],
+    "technical_skills": ["Python", "React", "AWS", "Kubernetes", "Machine Learning"],
+    "languages": ["English", "Spanish"],
+    "salary_expectation": 120000,
+    "availability": "2 weeks notice",
+    "remote_preference": "Hybrid",
+    "certifications": ["AWS Certified", "Scrum Master"],
+    "github_activity": "High",
+    "interview_availability": "Flexible"
+  },
+  {
+    "id": "C002",
+    "name": "Michael Chen",
+    "position_applied": "Senior Software Engineer",
+    "years_experience": 5,
+    "education": "MS Computer Science",
+    "previous_companies": ["Facebook", "Uber"],
+    "technical_skills": ["Java", "Spring", "Docker", "PostgreSQL", "Microservices"],
+    "languages": ["English", "Mandarin"],
+    "salary_expectation": 115000,
+    "availability": "Immediate",
+    "remote_preference": "Remote",
+    "certifications": ["Oracle Certified"],
+    "github_activity": "Medium",
+    "interview_availability": "Weekdays only"
+  },
+  {
+    "id": "C003",
+    "name": "Emily Rodriguez",
+    "position_applied": "Senior Software Engineer",
+    "years_experience": 4,
+    "education": "BS Software Engineering",
+    "previous_companies": ["Amazon", "Netflix"],
+    "technical_skills": ["JavaScript", "Node.js", "React", "MongoDB", "GraphQL"],
+    "languages": ["English", "Portuguese"],
+    "salary_expectation": 105000,
+    "availability": "1 month notice",
+    "remote_preference": "On-site",
+    "certifications": ["MongoDB Certified"],
+    "github_activity": "Very High",
+    "interview_availability": "Flexible"
+  },
+  {
+    "id": "C004",
+    "name": "David Kim",
+    "position_applied": "Senior Software Engineer",
+    "years_experience": 8,
+    "education": "PhD Computer Science",
+    "previous_companies": ["Apple", "Tesla", "Stanford Research"],
+    "technical_skills": ["C++", "Python", "TensorFlow", "CUDA", "Distributed Systems"],
+    "languages": ["English", "Korean"],
+    "salary_expectation": 140000,
+    "availability": "3 months notice",
+    "remote_preference": "Hybrid",
+    "certifications": ["NVIDIA Certified", "IEEE Member"],
+    "github_activity": "High",
+    "interview_availability": "Limited weekends"
+  },
+  {
+    "id": "C005",
+    "name": "Lisa Thompson",
+    "position_applied": "Senior Software Engineer",
+    "years_experience": 6,
+    "education": "BS Computer Engineering",
+    "previous_companies": ["IBM", "Salesforce"],
+    "technical_skills": ["Java", "Python", "Salesforce", "SQL", "API Development"],
+    "languages": ["English"],
+    "salary_expectation": 110000,
+    "availability": "2 weeks notice",
+    "remote_preference": "Hybrid",
+    "certifications": ["Salesforce Certified", "PMP"],
+    "github_activity": "Low",
+    "interview_availability": "Flexible"
+  }
+] [*candidates] #0
+
+
+Step 3 — HR Config (weights, stack, budget, cutoffs)
+
+HR config v1
+{
+  "config_id": "HR config v1",
+  "weights": { "tech_total": 40, "culture_total": 30, "business_total": 30 },
+  "tech_subweights": { "experience_max": 20, "stack_match_max": 12, "advanced_certs_max": 4, "github_signal_max": 4 },
+  "culture_rules": {
+    "flexibility_scores": { "Flexible": 10, "Weekdays only": 6, "Limited weekends": 3 },
+    "remote_modes_allowed": ["Hybrid","Remote","On-site"],
+    "language_requirements": ["English"],
+    "language_bonus": 5,
+    "remote_alignment_bonus": 5,
+    "extra_collab_certs": ["Scrum Master","PMP"],
+    "extra_collab_bonus": 5
+  },
+  "business_rules": {
+    "budget_max": 125000,
+    "availability_scores": { "Immediate": 10, "2 weeks notice": 8, "1 month notice": 6, "3 months notice": 2 },
+    "salary_within_budget_score": 20
+  },
+  "target_stack": ["Python","React","AWS","PostgreSQL"],
+  "bonus_tech": ["Kubernetes","Machine Learning","Microservices","Docker","GraphQL"],
+  "cutoffs": { "excellent": 80, "good": 65, "acceptable": 50 }
+}
+[*config_hr] #0
+
+
+Step 4 — Evaluation Criteria (declarative rules)
+
+Senior SWE criteria v1
+
+MANDATORY
+- Experience ≥ 5 years
+- Degree in CS/related or demonstrably equivalent portfolio
+- Match ≥ 2 items in target_stack
+
+SCORING (caps apply: Tech 40, Culture 30, Business 30)
+TECH
+- Experience: 5–6 yrs = +15; 7+ yrs = +20
+- Stack match: 2 items = +8; 3+ items = +12
+- Advanced certifications or relevant advanced degree: +0–4
+- GitHub activity: Very High/High = +4; Medium = +2
+
+CULTURE
+- Flexibility: per config.flexibility_scores
+- Remote alignment: if remote_preference ∈ remote_modes_allowed +5
+- Language: add +5 only if language_requirements are present
+- Extra collaboration certifications (Scrum Master/PMP): +5 (combined)
+
+BUSINESS
+- Salary within budget (≤ budget_max): +20
+- Availability timeline: per config.availability_scores
+
+CLASSIFICATION
+- Score ≥ excellent - “Excellent — Priority Interview”
+- Score ≥ good - “Good — Standard Interview”
+- Score ≥ acceptable - “Acceptable — Consider if needed”
+- Otherwise - “Not a fit — Decline”
+
+FAIRNESS
+- Do not gate on employer brand; prefer evidence of impact and scale.
+- Languages are scored only when required by the role.
+[*evaluation_criteria] #0
+
+
+Step 5 — Apply Initial Screening
+
+Apply *evaluation_criteria to (*candidates, *config_hr) [*initial_screening] #0
+
+
+Step 6 — Technical Assessment (declarative; no iteration syntax)
+
+Technical assessment v1
+
+LOGIC
+- Derive:
+  stack_match_count = count(technical_skills ∩ config.target_stack)
+  bonus_hit = exists(technical_skills ∩ config.bonus_tech)
+  github_high = github_activity ∈ {"Very High","High"}
+  degree_relevant = education aligned with role scope (when applicable)
+
+- Deep stack alignment:
+  - If stack_match_count ≥ 3 AND bonus_hit - tag "Fast-track technical interview"
+  - Else if stack_match_count ≥ 2 - tag "Standard technical process"
+  - Else - tag "Extended evaluation needed"
+
+- Innovation signals:
+  - If github_high - add note "active OSS/profile"
+  - If degree_relevant - add note "relevant advanced degree"
+
+- Append fields: technical_band, notes
+[*technical_assessment] #0
+
+Apply *technical_assessment to *initial_screening [*technical_evaluation] #0
+
+
+Step 7 — Final Selection (ranking policy; declarative)
+
+Final selection v1
+
+POLICY
+- Rank by total_score descending.
+- Tie-break sequence: stronger target_stack match - sooner availability - interview flexibility.
+- Consider team composition and skill diversity in recommendations.
+
+OUTPUT POLICY
+- Top 3 - "Immediate interview"
+- Next 3 - "Pipeline / backup"
+- Others - "Decline" or "Wait-list" with rationale
+[*final_selection_logic] #0
+
+Apply *final_selection_logic to *technical_evaluation [*final_ranking] #0
+
+
+Step 8 — Explainability per Candidate (declarative)
+
+Explainability per candidate v1
+
+INPUTS
+- *final_ranking
+- *config_hr
+
+RULES
+- Emit factor_contributions:
+  experience, stack_alignment, advanced_certs_degree, github_activity,
+  flexibility, remote_alignment, language, salary, availability.
+- Provide a one-sentence rationale explaining the classification.
+- Include provenance: config_id, cutoffs, and any tie-break basis.
+- Ensure the sum of contributions equals total_score (allow ±1 rounding adjustment when needed).
+[*logic_explain_hr] #0
+
+Apply *logic_explain_hr to (*final_ranking, *config_hr) [*explain_hr] #0
+
+
+Step 9 — Bias/Compliance Audit (optional)
+
+Bias audit v1
+
+CHECKS
+- Consistency of criteria across candidates.
+- No unintended proxies (e.g., employer brand).
+- Languages scored only when required.
+- Distribution across categories aligned with cutoffs.
+
+RESULT
+- Findings and recommended adjustments.
+[*bias_audit_logic] #0
+
+Apply *bias_audit_logic to (*candidates, *final_ranking) [*bias_audit] #0
+
+
+Step 10 — Report, Dashboard, Dependency Graph (optional)
+
+Compose hiring manager report from *initial_screening, *technical_evaluation, *final_ranking, *explain_hr, *bias_audit
+[*hm_report] #0
+
+Generate candidate dashboard (category distribution, top candidates, key flags and notes)
+from *final_ranking, *explain_hr [*hr_dashboard] #0
+
+Generate marker dependency tree clustered by type in Graphviz/DOT
+from *config_hr, *candidates, *initial_screening, *technical_evaluation, *final_ranking, *explain_hr, *hm_report, *hr_dashboard
+[*hr_graph_dot] #0
+
+
+Step 11 — Quick Views (display)
+
+Show *final_ranking
+Show *explain_hr
+Show *hm_report
+Show *hr_dashboard
+Show *hr_graph_dot
